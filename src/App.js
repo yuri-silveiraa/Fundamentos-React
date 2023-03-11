@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import './styles/App.css';
 import './styles/PostForm.css';
 import './styles/Feed.css';
@@ -8,19 +10,34 @@ import clockIcon from './images/clock.svg'
 import emptyFolderIcon from './images/empty-folder.svg'
 
 export default function App() {
-    const posts = [
+    const [posts, setPosts] = useState([
         {
             id: Math.random(),
             content: 'Conteudo do Post',
             userName: 'Yuri',
             publishAt: new Date()
         },
-    ]
+    ])
+
+    function handleSubmit (event) {
+        event.preventDefault()
+
+        setPosts([
+                ...posts,
+                {
+                    id: Math.random(),
+                    content: `Conteudo do Post ${Math.random()}`,
+                    userName: 'Yuri',
+                    publishAt: new Date()
+                },
+            ]
+        )
+    }
 
 
     return (
     <div className='wrapper'>
-        <form className='post-form'>
+        <form className='post-form' onSubmit={handleSubmit}>
             <input placeholder='Escreva uma nova história...' />
             <div>
                 <img src={userIcon} alt='User'/>
