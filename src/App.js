@@ -10,14 +10,9 @@ import clockIcon from './images/clock.svg'
 import emptyFolderIcon from './images/empty-folder.svg'
 
 export default function App() {
-    const [posts, setPosts] = useState([
-        {
-            id: Math.random(),
-            content: 'Conteudo do Post',
-            userName: 'Yuri',
-            publishAt: new Date()
-        },
-    ])
+    const [historys, setHistory] = useState() 
+    const [userName, setUsername] = useState()    
+    const [posts, setPosts] = useState([])
 
     function handleSubmit (event) {
         event.preventDefault()
@@ -26,23 +21,33 @@ export default function App() {
                 ...posts,
                 {
                     id: Math.random(),
-                    content: `Conteudo do Post ${Math.random()}`,
-                    userName: 'Yuri',
+                    content: historys,
+                    userName: userName,
                     publishAt: new Date()
                 },
-            ]
-        )
+            ])
+        
+        setHistory('')
+        setUsername('')
     }
 
 
     return (
     <div className='wrapper'>
         <form className='post-form' onSubmit={handleSubmit}>
-            <input placeholder='Escreva uma nova história...' />
+            <input
+                value={historys}
+                placeholder='Escreva uma nova história...' 
+                onChange={(event)=> setHistory(event.target.value)}
+            />
             <div>
                 <img src={userIcon} alt='User'/>
 
-                <input placeholder='Digite seu nome...' />
+                <input 
+                    value={userName}
+                    placeholder='Digite seu nome...'
+                    onChange={(event)=> setUsername(event.target.value)}
+                />
 
                 <button type='submit'>
                     <img src={paperPlaneIcon} alt='Paper Plane' />
