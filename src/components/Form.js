@@ -1,8 +1,9 @@
+import { useState } from 'react'
+
 import '../styles/PostForm.css';
 
 import userIcon from '../images/user.svg'
 import paperPlaneIcon from '../images/paper-plane.svg'
-import { useState } from 'react'
 
 
 export default function PostForm (props){
